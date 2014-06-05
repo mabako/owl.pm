@@ -2,7 +2,8 @@
 
 var express = require('express')
   , app = express()
-  , http = require('http');
+  , http = require('http')
+  , redirects = require('./static_redirects');
 
 
 app.configure(function() {
@@ -26,5 +27,12 @@ app.get('/u/:user', function(req, res) {
 app.get('/:topic(\\d+)', function(req, res) {
     res.redirect('http://forums.owlgaming.net/showthread.php?t=' + req.params.topic);
 });
+
+Object.keys(redirects).forEach(function(key) {
+	var value = redirects[key];
+	app.get('/' + key, function(req, res) {
+		res.redirect(value);
+	})
+})
 
 http.createServer(app).listen(app.get('port'), app.get('ip'));
