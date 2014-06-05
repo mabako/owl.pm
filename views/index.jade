@@ -1,0 +1,40 @@
+extend layout
+
+block content
+  section.container
+    hgroup
+      h1 owl.pm
+    .row
+      section.col-xs-12.col-sm-6.col-md-6
+        section
+          h2 What is this?
+          p A tiny url redirect to shorten links.
+          h2 Examples?
+          p Click the links on the left, or see the examples below for examples on how to fill in the underlined parts.
+          ul
+            li
+              | Forums: #{''}
+              a(href='/f/365') Information Center
+            li
+              | Forms: #{''}
+              a(href='/fm/2') Report a Script Bug
+            li
+              | Thread: #{''}
+              a(href='/5828') Useful Forum Links
+            li
+              | User: #{''}
+              a(href='/u/cat') The Cat
+
+          h2 Who can I blame?
+          p: a(href='/u/cat') cat
+      section.col-xs-12.col-sm-6.col-md-6
+        h2 Current Redirects
+        blockquote
+          each route in routes
+            if route.path != "/"
+              if route.path.indexOf(':') > -1
+                != 'owl.pm' + route.path.replace(':', '<u>').replace('(\\d+)', '') + "</u>\n"
+              else
+                a(href=route.path)
+                  = 'owl.pm' + route.path
+                = "\n"
