@@ -7,28 +7,34 @@ var express = require('express')
 
 
 app.configure(function() {
-    app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
-    app.set('ip', process.env.OPENSHIFT_NODEJS_IP || process.env.IP || '127.0.0.1')
-    app.set('views', __dirname + '/views');
-    app.set('view engine', 'jade');
-    app.use(app.router);
+  app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000);
+	app.set('ip', process.env.OPENSHIFT_NODEJS_IP || process.env.IP || '127.0.0.1')
+	app.set('views', __dirname + '/views');
+	app.set('view engine', 'jade');
+	app.use(app.router);
 });
 
 app.get('/f/:forum_id', function(req, res) {
-    res.redirect('http://forums.owlgaming.net/forumdisplay.php?f=' + req.params.forum_id);
+	res.redirect('http://forums.owlgaming.net/forumdisplay.php?f=' + req.params.forum_id);
 });
 
 app.get('/fm/:form_id', function(req, res) {
-    res.redirect('http://forums.owlgaming.net/forms.php?do=form&fid=' + req.params.form_id);
+	res.redirect('http://forums.owlgaming.net/forms.php?do=form&fid=' + req.params.form_id);
 });
 
 app.get('/:thread_id(\\d+)', function(req, res) {
-    res.redirect('http://forums.owlgaming.net/showthread.php?t=' + req.params.thread_id);
+	res.redirect('http://forums.owlgaming.net/showthread.php?t=' + req.params.thread_id);
 });
 
 app.get('/u/:username', function(req, res) {
-    res.redirect('http://forums.owlgaming.net/member.php?username=' + req.params.username);
+	res.redirect('http://forums.owlgaming.net/member.php?username=' + req.params.username);
 });
+
+app.get('/l/*', function(req, res) {
+	res.redirect('http://linkbook.owlgaming.net/index.php?do=/' + req.params[0]);
+})
+
+app.get('/l/')
 
 Object.keys(redirects).forEach(function(key) {
 	var value = redirects[key];
@@ -38,7 +44,7 @@ Object.keys(redirects).forEach(function(key) {
 })
 
 app.get('/', function(req, res) {
-  res.render('index', {routes: app.routes.get})
+	res.render('index', {routes: app.routes.get})
 });
 
 http.createServer(app).listen(app.get('port'), app.get('ip'));

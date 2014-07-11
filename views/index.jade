@@ -24,6 +24,9 @@ block content
             li
               | User: #{''}
               a(href='/u/cat') The Cat
+            li
+              | Linkbook: #{''}
+              a(href='/l/katelyn') Katelyn Kennedy
 
           h2 Who can I blame?
           p: a(href='/u/cat') cat
@@ -32,8 +35,8 @@ block content
         blockquote
           each route in routes
             if route.path != "/"
-              if route.path.indexOf(':') > -1
-                != 'owl.pm' + route.path.replace(':', '<u>').replace('(\\d+)', '') + "</u>\n"
+              if route.path.indexOf(':') > -1 || route.path.indexOf('*') > -1
+                != 'owl.pm' + route.path.replace('\*',':linkbook').replace(':', '<u>').replace('(\\d+)', '') + "</u>\n"
               else
                 a(href=route.path)
                   = 'owl.pm' + route.path
