@@ -34,7 +34,9 @@ app.get('/l/*', function(req, res) {
 	res.redirect('http://linkbook.owlgaming.net/index.php?do=/' + req.params[0]);
 })
 
-app.get('/l/')
+app.get('/b/:bug_id', function(req, res) {
+	res.redirect('http://bugs.owlgaming.net/view.php?id=' + req.params.bug_id);
+})
 
 Object.keys(redirects).forEach(function(key) {
 	var value = redirects[key];

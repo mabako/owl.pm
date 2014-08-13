@@ -10,5 +10,7 @@
 	"rules": "/f/366",
 	"news": "/f/500",
 	"script": "/f/369",
-	"ints": "http://owlgaming.net/?page_id=112"
+	"ints": "http://owlgaming.net/?page_id=112",
+	"l": "http://linkbook.owlgaming.net",
+	"b": "http://bugs.owlgaming.net"
 }
